@@ -35,7 +35,7 @@ def dijkstra(graph, sources=1):
         nodes_info = graph.nodes(data=True)
 
     # Creates new graph
-    tree = nx.Graph()
+    tree = nx.DiGraph()
 
     for node in graph.nodes(data=True):
         if node[1]['ancestor'] != None:
