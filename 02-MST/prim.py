@@ -32,7 +32,7 @@ def prim(graph):
         nodes_info = graph.nodes(data=True)
 
     # Creates minimum spanning tree graph
-    mst = nx.Graph()
+    mst = nx.DiGraph()
 
     # Adds all nodes to the new mst graph
     for node in graph.nodes(data=True):
