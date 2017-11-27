@@ -47,15 +47,15 @@ def dijkstra(graph, sources=1):
 
 def main():
     G = nx.Graph()
-    G.add_weighted_edges_from([[1, 2, 2],
-                               [1, 3, 8],
-                               [1, 6, 14],
-                               [2, 3, 6],
-                               [2, 5, 5],
-                               [3, 4, 3],
-                               [4, 5, 5],
-                               [4, 6, 6],
-                               [5, 6, 8]])
+    G.add_weighted_edges_from([['a', 'b', 2],
+                               ['a', 'c', 8],
+                               ['a', 'f', 14],
+                               ['b', 'c', 6],
+                               ['b', 'e', 5],
+                               ['c', 'd', 3],
+                               ['c', 'e', 5],
+                               ['d', 'f', 6],
+                               ['e', 'f', 8]])
 
     dijkstra_tree = dijkstra(G, sources=1)
 
