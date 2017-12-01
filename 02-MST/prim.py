@@ -21,7 +21,7 @@ def prim(graph):
 
         # Iterates over neighbors to update minimal distances and parents
         for node in graph.neighbors(min_node[0]):
-            node_info = (node, nodes_info[node])
+            node_info = (node, dict(nodes_info)[node])
             if node_info[1]['color'] == 'white':
                 new_dist = graph.get_edge_data(min_node[0], node_info[0])['weight']
                 # Checks if new weight is smaller than previous one, if it is, update data
@@ -47,13 +47,13 @@ def prim(graph):
 def main():
     # Creates test case graph and adds edges
     G = nx.Graph()
-    G.add_weighted_edges_from([[1, 2, 3.0],
-                              [2, 3, 5.0],
-                              [3, 4, 1.0],
-                              [4, 5, 2.0],
-                              [1, 4, 1.5],
-                              [5, 6, 3.0],
-                              [6, 3, 2.0]])
+    G.add_weighted_edges_from([['a', 'b', 3.0],
+                              ['b', 'c', 5.0],
+                              ['c', 'd', 1.0],
+                              ['d', 'e', 2.0],
+                              ['a', 'd', 1.5],
+                              ['e', 'f', 3.0],
+                              ['e', 'c', 2.0]])
     
     # Applies prim on graph
     mst = prim(G)
