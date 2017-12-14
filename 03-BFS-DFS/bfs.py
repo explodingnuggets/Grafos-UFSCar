@@ -7,13 +7,13 @@ def bfs(graph, start):
 
     # Initialize all nodes to white color, infinite distance and no parent
     for node in graph_cpy:
-        nx.set_node_attributes(graph_cpy, 'color', 'white')
-        nx.set_node_attributes(graph_cpy, 'min_dist', float('inf'))
-        nx.set_node_attributes(graph_cpy, 'parent', None)
+        nx.set_node_attributes(graph_cpy, 'white', 'color')
+        nx.set_node_attributes(graph_cpy, float('inf'), 'min_dist')
+        nx.set_node_attributes(graph_cpy, None, 'parent')
 
     # Initialize starting node to gray color, 0 distance
-    nx.set_node_attributes(graph_cpy, 'color', {start:'gray'})
-    nx.set_node_attributes(graph_cpy, 'min_dist', {start:0})
+    nx.set_node_attributes(graph_cpy, {start:'gray'}, 'color')
+    nx.set_node_attributes(graph_cpy, {start:0}, 'min_dist')
 
     # Initialize the queue and push the starting node into it
     Q = []
@@ -22,11 +22,11 @@ def bfs(graph, start):
         cur = Q.pop()
         for nbr in nx.all_neighbors(graph_cpy, cur):
             if graph_cpy.node[nbr]['color'] == 'white':
-                nx.set_node_attributes(graph_cpy, 'min_dist', {nbr:graph_cpy.node[cur]['min_dist'] + 1})
-                nx.set_node_attributes(graph_cpy, 'color', {nbr:'gray'})
-                nx.set_node_attributes(graph_cpy, 'parent', {nbr:cur})
+                nx.set_node_attributes(graph_cpy, {nbr:graph_cpy.node[cur]['min_dist'] + 1}, 'min_dist')
+                nx.set_node_attributes(graph_cpy, {nbr:'gray'}, 'color')
+                nx.set_node_attributes(graph_cpy, {nbr:cur}, 'parent')
                 Q.append(nbr)
-        nx.set_node_attributes(graph_cpy, 'color', {cur:'black'})
+        nx.set_node_attributes(graph_cpy, {cur:'black'}, 'color')
     
     # Build the resulting tree
     tree = nx.DiGraph()

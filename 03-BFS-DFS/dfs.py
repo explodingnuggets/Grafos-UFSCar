@@ -7,8 +7,8 @@ def dfs(graph, start):
 
     # Initialize all nodes to white color and no parent
     for node in graph_cpy:
-        nx.set_node_attributes(graph_cpy, 'color', 'white')
-        nx.set_node_attributes(graph_cpy, 'parent', None)
+        nx.set_node_attributes(graph_cpy, 'white', 'color')
+        nx.set_node_attributes(graph_cpy, None, 'parent')
 
     # Initialize global time
     global time
@@ -35,17 +35,17 @@ def dfs_visit(graph, cur):
     time += 1
     
     # Set time of discovery for each new node and mark as visited
-    nx.set_node_attributes(graph, 'time_discovery', {cur:time})
-    nx.set_node_attributes(graph, 'color', {cur:'gray'})
+    nx.set_node_attributes(graph, {cur:time}, 'time_discovery')
+    nx.set_node_attributes(graph, {cur:'gray'}, 'color')
     
     # Visit all unvisited neighbouring nodes
     for nbr in nx.all_neighbors(graph, cur):
         if graph.node[nbr]['color'] == 'white':
-            nx.set_node_attributes(graph, 'parent', {nbr:cur})
+            nx.set_node_attributes(graph, {nbr:cur}, 'parent')
             dfs_visit(graph, nbr)
 
     # Mark current node as finished and set time of finish
-    nx.set_node_attributes(graph, 'color', {cur:'black'})
+    nx.set_node_attributes(graph, {cur:'black'}, 'color')
     time += 1
-    nx.set_node_attributes(graph, 'time_finish', {cur:time})
+    nx.set_node_attributes(graph, {cur:time}, 'time_finish')
 
