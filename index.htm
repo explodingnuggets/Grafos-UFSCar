@@ -22,7 +22,7 @@
 
     <body>
         <!-- Page Header -->
-        <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+        <header class="masthead" style="background-image: url('pages/img/header.jpg')">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
@@ -40,17 +40,29 @@
         <article>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 col-md-10 mx-auto">
+                    <div class="col-lg-11 col-md-11 mx-auto">
                         <!-- Introduction -->
                         <p>Esse site é um agregado de pequenos tutoriais para a disciplina de Teoria dos Grafos, do segundo semestre do ano de 2017, ministrada pelo Prof. Dr. Alexandre Levada. Os alunos integrantes desse grupo são:</p>
+                        <ul>
+                            <li>Gabriel de Souza Alves      726515</li>
+                            <li>Jéssica</li>
+                            <li>Matheus Bortoleto da Silva  726570</li>
+                        </ul>
+                        <p>Os tópicos que esse trabalho busca abordar são:</p>
+                        <ul>
+                            <li><a href="#markov">Cadeia de Markov</a></li>
+                            <li><a href="#prim">Algoritmo de Prim</a></li>
+                            <li><a href="#bfsdfs">BFS e DFS</a></li>
+                            <li><a href="#dijkstra">Algoritmo de Dijkstra</a></li>
+                        </ul>
 
                         <!-- Markov Chain -->
-                        <h1 class="section-heading">Cadeia de Markov</h1>
+                        <h1 id="markov" class="section-heading">Cadeia de Markov</h1>
 
                         <hr>
 
                         <!-- Prim -->
-                        <h1 class="section-heading">Algoritmo de Prim</h1>
+                        <h1 id="prim" class="section-heading">Algoritmo de Prim</h1>
                         <p>O algoritmo de Prim é um dos mais utilizados para encontrar árvores mínimas geradoras, ou MSTs, dado um determinado grafo. Nesse tutorial, iremos criar passo à passo uma função que nos retorna uma MST, utilizando Prim.</p>
 			<p>Inicialmente, criamos uma função chamada prim, que recebe um objeto do tipo <code>networkx.Graph</code>. Esse é o grafo que será utilizado para encontrar a árvore mínima geradora. Também iremos adicionar um novo objeto na função, chamado de <code>mst</code>, que será retornado no final da execução. Essa será a árvore resultante.</p>
 			<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Função que implementa o algoritmo de Prim. Recebe um nx.Graph e retorna um nx.DiGraph</span></a>
@@ -148,17 +160,117 @@
 			<a class="sourceLine" id="cb6-45" data-line-number="45">            mst.add_weighted_edges_from([[parent, node[<span class="dv">0</span>], edge_weight]])</a>
 			<a class="sourceLine" id="cb6-46" data-line-number="46"></a>
 			<a class="sourceLine" id="cb6-47" data-line-number="47">    <span class="cf">return</span> mst</a></code></pre></div>
+			<p>O resultado da aplicação desse algoritmo, para esse <a href="pages/data/ha30_dist.txt">conjunto de dados</a>, pode ser visto na imagem a seguir:</p>
+
+			<img src="pages/img/prim.jpeg" alt="Resultado da aplicação de Prim" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">
 
                         <hr>
 
                         <!-- BFS and DFS -->
-                        <h1 class="section-heading">BFS e DFS</h1>
+                        <h1 id="bfsdfs" class="section-heading">BFS e DFS</h1>
                         
                         <hr>
 
                         <!-- Dijkstra -->
-                        <h1 class="section-heading">Dijkstra</h1>
+                        <h1 id="dijkstra" class="section-heading">Algoritmo de Dijkstra</h1>
+			<p>Encontrar caminhos mínimos utilizando grafos é um problema muito comum no nosso dia-a-dia. Os aplicativos que trabalham com mapas e rotas, na maior parte das vezes, tem que encontrar caminhos mínimos entre dois lugares. Para isso, é possível utilizar o algoritmo de Dijkstra, que nos permite buscar uma árvore de caminhos mínimos em um grafo, partindo de um ponto. Existe também a possibilidade de iniciarmos a busca de caminhos mínimos por mais de um ponto, para diversificar a geração de caminhos.</p>
+			<p>Iremos então, implementar o algoritmo de Dijkstra multi-origens. Para isso, inicialmente criamos uma função chamada <code>dijkstra</code>, que recebe um <em>grafo</em> do tipo <code>networkx.Graph</code>, assim com um valor <em>sources</em>, que determina a quantidade de origens para o algoritmo.</p>
+			<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Função que implementa o algoritmo de Dijkstra.</span></a>
+			<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">def</span> dijkstra(graph, sources):</a>
+			<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+			<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="co"># Árvore resultante</span></a>
+			<a class="sourceLine" id="cb1-5" data-line-number="5">    tree <span class="op">=</span> nx.DiGraph()</a>
+			<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+			<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="cf">return</span> tree</a></code></pre></div>
+			<p>Em seguida, seguiremos a mesma lógica do algoritmo de Prim, alterando apenas a inicialização dos vértices origem. Portanto, cada vértice tem atributos <em>cor</em>, <em>lambda</em> e <em>pi</em>, elas significando respectivamente, se o vértice foi o visitado, a distância mínima total para aquele vértice encontrado e o pai daquele vértice. Temos então a inicialização dos mesmos:</p>
+			<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Inicializa a cor dos vértices (white: não visitado, black: visitado)</span></a>
+			<a class="sourceLine" id="cb2-2" data-line-number="2">nx.set_node_attributes(graph, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;color&#39;</span>)</a>
+			<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># Inicializa a lambda (distância mínima total dos vértices) como infinito</span></a>
+			<a class="sourceLine" id="cb2-4" data-line-number="4">nx.set_node_attributes(graph, <span class="bu">float</span>(<span class="st">&#39;inf&#39;</span>), <span class="st">&#39;lambda&#39;</span>)</a>
+			<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co"># Seleciona &#39;n&#39; elementos para iniciar o algoritmo (minimum distance = 0)</span></a>
+			<a class="sourceLine" id="cb2-6" data-line-number="6">nodes <span class="op">=</span> random.sample(graph.nodes, sources)</a>
+			<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="cf">for</span> node <span class="kw">in</span> nodes:</a>
+			<a class="sourceLine" id="cb2-8" data-line-number="8">    nx.set_node_attributes(graph, {node: <span class="dv">0</span>}, <span class="st">&#39;lambda&#39;</span>)</a>
+			<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># Inicializa os o pai dos vértices como None</span></a>
+			<a class="sourceLine" id="cb2-10" data-line-number="10">nx.set_node_attributes(graph, <span class="va">None</span>, <span class="st">&#39;pi&#39;</span>)</a></code></pre></div>
+			<p>Logo depois, selecionamos todos os vértices e suas informações. Utilizando esses dados, criamos o loop principal, que executa enquanto existirem nós não visitados. Dentro desse loop, é necessário escolher qual será o próximo nó a ser visitado. Isso é determinado pelo menor valor de lambda, de um vértice não visitado.</p>
+			<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Enquanto existir um vértice não visitado, continua executando o algortimo</span></a>
+			<a class="sourceLine" id="cb3-2" data-line-number="2">nodes_info <span class="op">=</span> graph.nodes(data<span class="op">=</span><span class="va">True</span>)</a>
+			<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="cf">while</span> <span class="bu">any</span>(node[<span class="dv">1</span>][<span class="st">&#39;color&#39;</span>] <span class="op">==</span> <span class="st">&#39;white&#39;</span> <span class="cf">for</span> node <span class="kw">in</span> nodes_info):</a>
+			<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="co"># Seleciona os nós brancos, e em seguida, seleciona o nó com menor lambda que ainda não foi visitado</span></a>
+			<a class="sourceLine" id="cb3-5" data-line-number="5">    white_nodes <span class="op">=</span> [node <span class="cf">for</span> node <span class="kw">in</span> nodes_info <span class="cf">if</span> node[<span class="dv">1</span>][<span class="st">&#39;color&#39;</span>] <span class="op">==</span> <span class="st">&#39;white&#39;</span>]</a>
+			<a class="sourceLine" id="cb3-6" data-line-number="6">    min_node <span class="op">=</span> <span class="bu">min</span>(white_nodes, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>][<span class="st">&#39;lambda&#39;</span>]) </a></code></pre></div>
+			<p>Assim que selecionamos o vértice a ser analisado, iteramos sobre todos os seus vizinhos, checando se é necessário atualizar os valores de lambda e pi. Esse processo é semelhante ao algoritmo de Prim, a única diferença é que lambda nesse caso não é somente o valor da aresta, e sim a distância total do caminho. Portanto, temos:</p>
+			<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Itera sobre todos os vizinhos nó vértice selecionado.</span></a>
+			<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="cf">for</span> node <span class="kw">in</span> graph.neighbors(min_node[<span class="dv">0</span>]):</a>
+			<a class="sourceLine" id="cb4-3" data-line-number="3">    node_info <span class="op">=</span> (node, nodes_info[node])</a>
+			<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="cf">if</span> node_info[<span class="dv">1</span>][<span class="st">&#39;color&#39;</span>] <span class="op">==</span> <span class="st">&#39;white&#39;</span>:</a>
+			<a class="sourceLine" id="cb4-5" data-line-number="5">        new_dist <span class="op">=</span> graph.get_edge_data(min_node[<span class="dv">0</span>], node_info[<span class="dv">0</span>])[<span class="st">&#39;weight&#39;</span>] <span class="op">+</span> min_node[<span class="dv">1</span>][<span class="st">&#39;lambda&#39;</span>]</a>
+			<a class="sourceLine" id="cb4-6" data-line-number="6">        <span class="co"># Checa se é necessário atualizar os valores lambda e pi</span></a>
+			<a class="sourceLine" id="cb4-7" data-line-number="7">        <span class="cf">if</span> new_dist <span class="op">&lt;</span> node_info[<span class="dv">1</span>][<span class="st">&#39;lambda&#39;</span>]:</a>
+			<a class="sourceLine" id="cb4-8" data-line-number="8">            nx.set_node_attributes(graph, {node_info[<span class="dv">0</span>]: new_dist}, <span class="st">&#39;lambda&#39;</span>)</a>
+			<a class="sourceLine" id="cb4-9" data-line-number="9">            nx.set_node_attributes(graph, {node_info[<span class="dv">0</span>]: min_node[<span class="dv">0</span>]}, <span class="st">&#39;pi&#39;</span>)</a>
+			<a class="sourceLine" id="cb4-10" data-line-number="10">nx.set_node_attributes(graph, {min_node[<span class="dv">0</span>]: <span class="st">&#39;black&#39;</span>}, <span class="st">&#39;color&#39;</span>)</a>
+			<a class="sourceLine" id="cb4-11" data-line-number="11">nodes_info <span class="op">=</span> graph.nodes(data<span class="op">=</span><span class="va">True</span>)</a></code></pre></div>
+			<p>Só nos então, montar a árvore resultante da aplicação do algoritmo. Iteramos sobre cada grafo, adicionado-os com a informação de pi, como vértice pai e o peso da aresta entre o pai e o vértice, como o peso da aresta na árvore.</p>
+			<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Itera sobre todos os vértices, adicionado-os a árvore resultante</span></a>
+			<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="cf">for</span> node <span class="kw">in</span> graph.nodes(data<span class="op">=</span><span class="va">True</span>):</a>
+			<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="cf">if</span> node[<span class="dv">1</span>][<span class="st">&#39;pi&#39;</span>] <span class="op">!=</span> <span class="va">None</span>:</a>
+			<a class="sourceLine" id="cb5-4" data-line-number="4">        edge_weight <span class="op">=</span> graph.get_edge_data(node[<span class="dv">0</span>], node[<span class="dv">1</span>][<span class="st">&#39;pi&#39;</span>])</a>
+			<a class="sourceLine" id="cb5-5" data-line-number="5">        ancestor <span class="op">=</span> node[<span class="dv">1</span>][<span class="st">&#39;pi&#39;</span>]</a>
+			<a class="sourceLine" id="cb5-6" data-line-number="6">        tree.add_weighted_edges_from([[ancestor, node[<span class="dv">0</span>], edge_weight]])</a></code></pre></div>
+			<p>O algoritmo finalizado é:</p>
+			<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Função que implementa o algoritmo de Dijkstra.</span></a>
+			<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">def</span> dijkstra(graph, sources):</a>
+			<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="co"># Inicializa a cor dos vértices (white: não visitado, black: visitado)</span></a>
+			<a class="sourceLine" id="cb6-4" data-line-number="4">    nx.set_node_attributes(graph, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;color&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="co"># Inicializa a lambda (distância mínima total dos vértices) como infinito</span></a>
+			<a class="sourceLine" id="cb6-6" data-line-number="6">    nx.set_node_attributes(graph, <span class="bu">float</span>(<span class="st">&#39;inf&#39;</span>), <span class="st">&#39;lambda&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="co"># Seleciona &#39;n&#39; elementos para iniciar o algoritmo (minimum distance = 0)</span></a>
+			<a class="sourceLine" id="cb6-8" data-line-number="8">    nodes <span class="op">=</span> random.sample(graph.nodes, sources)</a>
+			<a class="sourceLine" id="cb6-9" data-line-number="9">    <span class="cf">for</span> node <span class="kw">in</span> nodes:</a>
+			<a class="sourceLine" id="cb6-10" data-line-number="10">        nx.set_node_attributes(graph, {node: <span class="dv">0</span>}, <span class="st">&#39;lambda&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-11" data-line-number="11">    <span class="co"># Inicializa os o pai dos vértices como None</span></a>
+			<a class="sourceLine" id="cb6-12" data-line-number="12">    nx.set_node_attributes(graph, <span class="va">None</span>, <span class="st">&#39;pi&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-13" data-line-number="13"></a>
+			<a class="sourceLine" id="cb6-14" data-line-number="14">    <span class="co"># Enquanto existir um vértice não visitado, continua executando o algortimo</span></a>
+			<a class="sourceLine" id="cb6-15" data-line-number="15">    nodes_info <span class="op">=</span> graph.nodes(data<span class="op">=</span><span class="va">True</span>)</a>
+			<a class="sourceLine" id="cb6-16" data-line-number="16">    <span class="cf">while</span> <span class="bu">any</span>(node[<span class="dv">1</span>][<span class="st">&#39;color&#39;</span>] <span class="op">==</span> <span class="st">&#39;white&#39;</span> <span class="cf">for</span> node <span class="kw">in</span> nodes_info):</a>
+			<a class="sourceLine" id="cb6-17" data-line-number="17">        <span class="co"># Seleciona os nós brancos, e em seguida, seleciona o nó com menor lambda que ainda não foi visitado</span></a>
+			<a class="sourceLine" id="cb6-18" data-line-number="18">        white_nodes <span class="op">=</span> [node <span class="cf">for</span> node <span class="kw">in</span> nodes_info <span class="cf">if</span> node[<span class="dv">1</span>][<span class="st">&#39;color&#39;</span>] <span class="op">==</span> <span class="st">&#39;white&#39;</span>]</a>
+			<a class="sourceLine" id="cb6-19" data-line-number="19">        min_node <span class="op">=</span> <span class="bu">min</span>(white_nodes, key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>][<span class="st">&#39;lambda&#39;</span>]) </a>
+			<a class="sourceLine" id="cb6-20" data-line-number="20"></a>
+			<a class="sourceLine" id="cb6-21" data-line-number="21">        <span class="co"># Itera sobre todos os vizinhos nó vértice selecionado.</span></a>
+			<a class="sourceLine" id="cb6-22" data-line-number="22">        <span class="cf">for</span> node <span class="kw">in</span> graph.neighbors(min_node[<span class="dv">0</span>]):</a>
+			<a class="sourceLine" id="cb6-23" data-line-number="23">            node_info <span class="op">=</span> (node, nodes_info[node])</a>
+			<a class="sourceLine" id="cb6-24" data-line-number="24">            <span class="cf">if</span> node_info[<span class="dv">1</span>][<span class="st">&#39;color&#39;</span>] <span class="op">==</span> <span class="st">&#39;white&#39;</span>:</a>
+			<a class="sourceLine" id="cb6-25" data-line-number="25">                new_dist <span class="op">=</span> graph.get_edge_data(min_node[<span class="dv">0</span>], node_info[<span class="dv">0</span>])[<span class="st">&#39;weight&#39;</span>] <span class="op">+</span> min_node[<span class="dv">1</span>][<span class="st">&#39;lambda&#39;</span>]</a>
+			<a class="sourceLine" id="cb6-26" data-line-number="26">                <span class="co"># Checa se é necessário atualizar os valores lambda e pi</span></a>
+			<a class="sourceLine" id="cb6-27" data-line-number="27">                <span class="cf">if</span> new_dist <span class="op">&lt;</span> node_info[<span class="dv">1</span>][<span class="st">&#39;lambda&#39;</span>]:</a>
+			<a class="sourceLine" id="cb6-28" data-line-number="28">                    nx.set_node_attributes(graph, {node_info[<span class="dv">0</span>]: new_dist}, <span class="st">&#39;lambda&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-29" data-line-number="29">                    nx.set_node_attributes(graph, {node_info[<span class="dv">0</span>]: min_node[<span class="dv">0</span>]}, <span class="st">&#39;pi&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-30" data-line-number="30">        nx.set_node_attributes(graph, {min_node[<span class="dv">0</span>]: <span class="st">&#39;black&#39;</span>}, <span class="st">&#39;color&#39;</span>)</a>
+			<a class="sourceLine" id="cb6-31" data-line-number="31">        nodes_info <span class="op">=</span> graph.nodes(data<span class="op">=</span><span class="va">True</span>)</a>
+			<a class="sourceLine" id="cb6-32" data-line-number="32"></a>
+			<a class="sourceLine" id="cb6-33" data-line-number="33">    <span class="co"># Árvore resultante</span></a>
+			<a class="sourceLine" id="cb6-34" data-line-number="34">    tree <span class="op">=</span> nx.DiGraph()</a>
+			<a class="sourceLine" id="cb6-35" data-line-number="35"></a>
+			<a class="sourceLine" id="cb6-36" data-line-number="36">    <span class="co"># Itera sobre todos os vértices, adicionado-os a árvore resultante</span></a>
+			<a class="sourceLine" id="cb6-37" data-line-number="37">    <span class="cf">for</span> node <span class="kw">in</span> graph.nodes(data<span class="op">=</span><span class="va">True</span>):</a>
+			<a class="sourceLine" id="cb6-38" data-line-number="38">        <span class="cf">if</span> node[<span class="dv">1</span>][<span class="st">&#39;pi&#39;</span>] <span class="op">!=</span> <span class="va">None</span>:</a>
+			<a class="sourceLine" id="cb6-39" data-line-number="39">            edge_weight <span class="op">=</span> graph.get_edge_data(node[<span class="dv">0</span>], node[<span class="dv">1</span>][<span class="st">&#39;pi&#39;</span>])</a>
+			<a class="sourceLine" id="cb6-40" data-line-number="40">            ancestor <span class="op">=</span> node[<span class="dv">1</span>][<span class="st">&#39;pi&#39;</span>]</a>
+			<a class="sourceLine" id="cb6-41" data-line-number="41">            tree.add_weighted_edges_from([[ancestor, node[<span class="dv">0</span>], edge_weight]])</a>
+			<a class="sourceLine" id="cb6-42" data-line-number="42"></a>
+			<a class="sourceLine" id="cb6-43" data-line-number="43">    <span class="cf">return</span> tree</a></code></pre></div>
+			<p>O resultado da aplicação desse algoritmo para o <a href="pages/data/wg59_dist.txt">conjunto de dados</a>, pode ser visto na imagem a seguir (primeira imagem tem source=2, e a segunda tem source=3):</p>
                         
+
+			<img src="pages/img/dijkstra2.jpeg" alt="Resultado da aplicação de Dijkstra com duas origens" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">
+			<hr>
+
+			<img src="pages/img/dijkstra3.jpeg" alt="Resultado da aplicação de Dijkstra com três origens" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">
+
                         <hr>
                     </div>
                 </div>

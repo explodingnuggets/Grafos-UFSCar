@@ -119,3 +119,5 @@ def prim(graph):
 
     return mst
 ```
+
+O resultado da aplicação desse algoritmo, para esse [conjunto de dados](pages/data/ha30_dist.txt), pode ser visto na imagem a seguir:
