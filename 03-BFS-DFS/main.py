@@ -8,6 +8,7 @@ from dfs import dfs
 G_karate = nx.read_pajek('karate.paj')
 G_dolphins = nx.read_pajek('dolphins.paj')
 
+# Generate BFS and DFS for both graphs using NetworkX's methods on the first node of each
 nx_karate_bfs = [nx.bfs_tree(G_karate, '1'), "karate_bfs_nx.png"]
 nx_karate_dfs = [nx.dfs_tree(G_karate, '1'), "karate_dfs_nx.png"]
 nx_dolphins_bfs = [nx.bfs_tree(G_dolphins, '0'), "dolphins_bfs_nx.png"]
@@ -29,6 +30,8 @@ Our_results = (our_karate_bfs, our_karate_dfs, our_dolphins_bfs, our_dolphins_df
 for graph in NX_results:
     nx.draw_networkx(graph[0])
     plt.savefig(graph[1])
+    plt.show()
 for graph in Our_results:
     nx.draw_networkx(graph[0])
     plt.savefig(graph[1])
+    plt.show()
