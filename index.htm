@@ -441,7 +441,7 @@
 						<a class="sourceLine" id="cb1-4" data-line-number="4">    </a>
 						<a class="sourceLine" id="cb1-5" data-line-number="5">    multi_copy <span class="op">=</span> mst_multi.copy()</a>
 						<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="cf">for</span> u,v <span class="kw">in</span> multi_copy.edges():</a>
-						<a class="sourceLine" id="cb1-7" data-line-number="7">        mst_multi.add_edge(u,v)     <span class="co">#Duplicando as arestas da mst</span></a>
+						<a class="sourceLine" id="cb1-7" data-line-number="7">        mst_multi.add_edge(u,v)     <span class="co"># Duplicando as arestas da mst</span></a>
 						<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
 						<a class="sourceLine" id="cb1-9" data-line-number="9">    euler <span class="op">=</span> <span class="bu">list</span>(nx.eulerian_circuit(mst_multi, source)) <span class="co"># Gerando um circuito euleriano</span></a>
 						<a class="sourceLine" id="cb1-10" data-line-number="10">    cycle <span class="op">=</span> nx.Graph()</a>
@@ -457,7 +457,7 @@
 						<a class="sourceLine" id="cb1-20" data-line-number="20">    f_weight <span class="op">=</span> <span class="dv">0</span></a>
 						<a class="sourceLine" id="cb1-21" data-line-number="21">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">30</span>):</a>
 						<a class="sourceLine" id="cb1-22" data-line-number="22">        cycle.add_edge(h[i],h[i<span class="op">+</span><span class="dv">1</span>]) <span class="co"># Gerando grafo resultante</span></a>
-						<a class="sourceLine" id="cb1-23" data-line-number="23">        cycle[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>] <span class="op">=</span> graph[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>] <span class="co"># copiando tambem o peso</span></a>
+						<a class="sourceLine" id="cb1-23" data-line-number="23">        cycle[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>] <span class="op">=</span> graph[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>]
 						<a class="sourceLine" id="cb1-24" data-line-number="24">        f_weight <span class="op">+=</span> graph[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>]</a>
 						<a class="sourceLine" id="cb1-25" data-line-number="25">    </a>
 						<a class="sourceLine" id="cb1-26" data-line-number="26">    <span class="cf">return</span> (cycle, f_weight)</a></code></pre></div>
