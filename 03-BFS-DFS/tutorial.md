@@ -1,7 +1,8 @@
 Para o terceiro trabalho, implementamos os algoritmos de DFS e BFS a seguir na linguagem Python:
 
 ### DFS
-`DFS(G, s){
+```python
+DFS(G, s){
     // Inicialização dos vértices
     para cada u ∈ V{
 	u.cor = BRANCO
@@ -11,10 +12,10 @@ Para o terceiro trabalho, implementamos os algoritmos de DFS e BFS a seguir na l
     tempo = 0 // variável global para armazenar o tempo
 
     DFS_visit(G, s)
-}`
+}
 
-// Função recursiva que é chamada sempre que um vértice é descoberto
-`DFS_visit(G, u){
+# Função recursiva que é chamada sempre que um vértice é descoberto
+DFS_visit(G, u){
      tempo++
      u.tempo_descoberto = tempo
      u.cor = CINZA
@@ -28,10 +29,13 @@ Para o terceiro trabalho, implementamos os algoritmos de DFS e BFS a seguir na l
      u.cor = PRETO
      tempo++
      u.finalizado = tempo
-}`
+}
+```
 
-#### BFS
-`BFS(G, s){
+### BFS
+
+```python
+BFS(G, s){
      // Inicialização dos vértices
      para todo v ∈ V − {s} {
 	  v.cor = BRANCO
@@ -60,7 +64,8 @@ Para o terceiro trabalho, implementamos os algoritmos de DFS e BFS a seguir na l
 	   }
 	   u.cor = PRETO // Após explorar todos vizinhos de u, finalizo u
      }
-}`
+}
+```
 
 ### Código 
 (colocar bfs() e dfs() aqui)
@@ -68,7 +73,6 @@ Para o terceiro trabalho, implementamos os algoritmos de DFS e BFS a seguir na l
 E então os aplicamos nos grafos Dolphin's Social Network e Zachary's Karate Club:
 
 ### Resultados
-(colocar imagens aqui)
 #### Karate:
 
 #### Dolphins:
