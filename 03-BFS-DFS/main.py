@@ -30,7 +30,8 @@ Our_results = (our_karate_bfs, our_karate_dfs, our_dolphins_bfs, our_dolphins_df
 for graph in NX_results:
     nx.draw_networkx(graph[0])
     plt.savefig(graph[1])
+    plt.show()
 for graph in Our_results:
     nx.draw_networkx(graph[0])
     plt.savefig(graph[1])
-
+    plt.show()
