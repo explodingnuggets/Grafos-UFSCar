@@ -3,14 +3,19 @@ import networkx as nx
 import random
 
 def twicearound(graph, source=0):
-	mst = nx.minimum_spanning_tree(graph) # gero a mst a partir do grafo original
-	mst_multi = nx.MultiGraph(mst) # como somente multigrafos aceitam arestas paralelas
+	# Make MST from original Graph
+	mst = nx.minimum_spanning_tree(graph)
+
+	# Only MultiGraphs can have parallel edges
+	mst_multi = nx.MultiGraph(mst)
     
+	# Double the edges in the MST
 	multi_copy = mst_multi.copy()
 	for u,v in multi_copy.edges():
-		mst_multi.add_edge(u,v)     #duplico arestas da mst
+		mst_multi.add_edge(u,v)
 
-	euleraux = list(nx.eulerian_circuit(mst_multi, source)) # gero um circuito euleriano
+	# Generate Eulerian Circuit
+	euler = list(nx.eulerian_circuit(mst_multi, source))
 	cycle = nx.Graph()
 	aux = []
 	for u,v in euleraux: 
@@ -18,13 +23,15 @@ def twicearound(graph, source=0):
 		aux.append(v)
 	h = []
 	for i in aux: 
-		if (i not in h):    # elimino repeticoes
+		# Remove repeated nodes
+		if (i not in h):
 			h.append(i)
 	h.append(source)
 	f_weight = 0
 	for i in range (30):
-		cycle.add_edge(h[i],h[i+1]) # gero grafo resultante
-		cycle[h[i]][h[i+1]]['weight'] = graph[h[i]][h[i+1]]['weight'] # copiando tambem o peso
+		# Generate resulting Graph
+		cycle.add_edge(h[i],h[i+1])
+		cycle[h[i]][h[i+1]]['weight'] = graph[h[i]][h[i+1]]['weight']
 		f_weight += graph[h[i]][h[i+1]]['weight']
     
 	return (cycle, f_weight)
