@@ -59,6 +59,25 @@
 
                         <!-- Markov Chain -->
                         <h1 id="markov" class="section-heading">Cadeia de Markov</h1>
+						<h1 id="snakes-and-ladders">Snakes and Ladders</h1>
+						<p>Snakes and Ladders é um famoso jogo de tabuleiro em que a cada rodada um jogador joga uma moeda não viciada e avança 1 casa se obtiver cara ou avança 2 casas se obtiver coroa. Se o jogador para no pé da escada, então ele imediatamente sobe para o topo da escada. Se o jogador cai na boca de um cobra então ele imediatamente escorrega para o rabo. O jogador sempre inicia no quadrado de número 1. O jogo termina quando ele atinge o quadrado de número 36.</p>
+						<h2 id="método">Método</h2>
+						<p>Para o problema do Snakes and Ladders fizemos a implementação em Python das casas onde havia uma cobra ou uma escada na função shift(), que indica para onde deve ir o jogador que pare em uma delas:</p>
+						<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> shift_positions():</a>
+						<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co"># Builds the game table with the shift positions for the Snakes and Ladders squares</span></a>
+						<a class="sourceLine" id="cb1-3" data-line-number="3">    table <span class="op">=</span> [<span class="dv">0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">36</span>)]</a>
+						<a class="sourceLine" id="cb1-4" data-line-number="4">    table[<span class="dv">1</span>] <span class="op">=</span> <span class="dv">14</span></a>
+						<a class="sourceLine" id="cb1-5" data-line-number="5">    table[<span class="dv">4</span>] <span class="op">=</span> <span class="dv">6</span></a>
+						<a class="sourceLine" id="cb1-6" data-line-number="6">    table[<span class="dv">8</span>] <span class="op">=</span> <span class="dv">26</span></a>
+						<a class="sourceLine" id="cb1-7" data-line-number="7">    table[<span class="dv">16</span>] <span class="op">=</span> <span class="dv">3</span></a>
+						<a class="sourceLine" id="cb1-8" data-line-number="8">    table[<span class="dv">17</span>] <span class="op">=</span> <span class="dv">28</span></a>
+						<a class="sourceLine" id="cb1-9" data-line-number="9">    table[<span class="dv">19</span>] <span class="op">=</span> <span class="dv">5</span></a>
+						<a class="sourceLine" id="cb1-10" data-line-number="10">    table[<span class="dv">23</span>] <span class="op">=</span> <span class="dv">15</span></a>
+						<a class="sourceLine" id="cb1-11" data-line-number="11">    table[<span class="dv">24</span>] <span class="op">=</span> <span class="dv">34</span></a>
+						<a class="sourceLine" id="cb1-12" data-line-number="12">    table[<span class="dv">31</span>] <span class="op">=</span> <span class="dv">29</span></a>
+						<a class="sourceLine" id="cb1-13" data-line-number="13">    table[<span class="dv">33</span>] <span class="op">=</span> <span class="dv">11</span></a>
+						<a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="cf">return</span> table</a></code></pre></div>
+						<p>E implementamos também funções para calcular a cadeia de Markov e o Power Method:</p>
 						<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> markov_chain(shift):</a>
 						<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co"># Builds the Markov Chain for the table which indicates the probability of reaching a table square from another</span></a>
 						<a class="sourceLine" id="cb1-3" data-line-number="3">    chain <span class="op">=</span> np.zeros(shape<span class="op">=</span>(<span class="dv">36</span>,<span class="dv">36</span>))</a>
@@ -88,6 +107,17 @@
 						<a class="sourceLine" id="cb1-27" data-line-number="27">                pos[i] <span class="op">+=</span> A[j]<span class="op">*</span>markov[j][i]</a>
 						<a class="sourceLine" id="cb1-28" data-line-number="28">        A <span class="op">=</span> pos</a>
 						<a class="sourceLine" id="cb1-29" data-line-number="29">    <span class="cf">return</span> A</a></code></pre></div>
+						<h2 id="a">A)</h2>
+						<p>Para poder obter o diagrama de estados da cadeia de Markov, rodamos o script que fizemos e este foi o resultado:</p>
+						
+						<img src="pages/img/markov.jpeg" alt="Cadeia de Markov resultante" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">
+
+						<h2 id="b">B)</h2>
+						<p>Para calcular a distribuição estacionária da cadeia de Markov, rodamos nosso script de Power method 100 vezes, passando a cadeia e o número de vezes desejado na função <code>power_method(M,100)</code></p>
+						<p>O resultado para cada posição do tabuleiro foi este:</p>
+						<a href="pages/data/power_method.txt">Resultado</a>
+						<p>É possível ver que para a última posição do tabuleiro (#36) a chance de chegar (e vencer) a longo prazo é de 0.04101%.</p>
+						<p>Podemos também ver que as posições mais acessadas são #29, #16 e #4, sendo a posição #29 a mais acessada de todas.</p>
 
                         <hr>
 
