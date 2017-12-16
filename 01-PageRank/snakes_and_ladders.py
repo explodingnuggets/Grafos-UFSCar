@@ -53,7 +53,7 @@ def main():
     G = nx.from_numpy_matrix(M)
 
     nx.draw_networkx(G)
-    plt.show()
+    plt.savefig('markov_chain.png')
 
     P = power_method(M, 100)
     for x in range(36):
