@@ -74,6 +74,10 @@ E então os aplicamos nos grafos Dolphin's Social Network e Zachary's Karate Clu
 
 ### Resultados
 #### Karate:
+* BFS:
+* DFS:
 
 #### Dolphins:
+* BFS:
+* DFS:
 

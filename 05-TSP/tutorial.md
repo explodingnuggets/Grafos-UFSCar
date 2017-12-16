@@ -1,5 +1,3 @@
-# O Problema do Caixeiro Viajante
-
 Para este problema, implementamos o algoritmo Twice Around em Python:
 
 ### Twice Around
@@ -7,15 +5,15 @@ Para este problema, implementamos o algoritmo Twice Around em Python:
   Ler grafo G = (V, E, p)
   H ← vazia
 
-* Passo1. T ← MST(G) // Aplicando o algoritmo de Kruskal
-	Para cada e ∈ T {
-	T ← T + e (Duplique aresta e)
+* Passo 1.:
+	- T ← MST(G) // Aplicando o algoritmo de Kruskal
+	- Para cada e ∈ T, T ← T + e  // Duplicando as arestas e
 * Passo 2. Encontre um circuito Euleriano L em T // Aplicando Fleury
 * Passo 3. Enquanto L != vazio:
-	Escolha sequencialmente lk ∈ L
-	Se lk ∉ H então
-	H ← H U {lk}
-	L ← L – {lk}
+	- Escolha sequencialmente lk ∈ L
+	- Se lk ∉ H então
+	- H ← H U {lk}
+	- L ← L – {lk}
 
 ### Código
 

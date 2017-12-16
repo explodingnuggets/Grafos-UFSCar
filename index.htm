@@ -45,8 +45,8 @@
                         <p>Esse site é um agregado de pequenos tutoriais para a disciplina de Teoria dos Grafos, do segundo semestre do ano de 2017, ministrada pelo Prof. Dr. Alexandre Levada. Os alunos integrantes desse grupo são:</p>
                         <ul>
                             <li>Gabriel de Souza Alves      726515</li>
-                            <li>Jéssica</li>
                             <li>Matheus Bortoleto da Silva  726570</li>
+			    <li>Jéssica Gama Simões	    511323</li>
                         </ul>
                         <p>Os tópicos que esse trabalho busca abordar são:</p>
                         <ul>
@@ -54,12 +54,12 @@
                             <li><a href="#prim">Algoritmo de Prim</a></li>
                             <li><a href="#bfsdfs">BFS e DFS</a></li>
                             <li><a href="#dijkstra">Algoritmo de Dijkstra</a></li>
-							<li><a href="#tsp">Problema do Caixeiro Viajante</a></li>
+			    <li><a href="#tsp">Problema do Caixeiro Viajante</a></li>
                         </ul>
 
                         <!-- Markov Chain -->
                         <h1 id="markov" class="section-heading">Cadeia de Markov</h1>
-						<h1 id="snakes-and-ladders">Snakes and Ladders</h1>
+						<h2 id="snakes-and-ladders">Snakes and Ladders</h2>
 						<p>Snakes and Ladders é um famoso jogo de tabuleiro em que a cada rodada um jogador joga uma moeda não viciada e avança 1 casa se obtiver cara ou avança 2 casas se obtiver coroa. Se o jogador para no pé da escada, então ele imediatamente sobe para o topo da escada. Se o jogador cai na boca de um cobra então ele imediatamente escorrega para o rabo. O jogador sempre inicia no quadrado de número 1. O jogo termina quando ele atinge o quadrado de número 36.</p>
 						<h2 id="método">Método</h2>
 						<p>Para o problema do Snakes and Ladders fizemos a implementação em Python das casas onde havia uma cobra ou uma escada na função shift(), que indica para onde deve ir o jogador que pare em uma delas:</p>
@@ -292,19 +292,19 @@
 						<p>E então os aplicamos nos grafos Dolphin’s Social Network e Zachary’s Karate Club:</p>
 						<h3 id="resultados">Resultados</h3>
 						<h4 id="karate">Karate:</h4>
-
+						<h5 id="karatebfs">BFS:</h4>
 						<img src="pages/img/bfs1.jpeg" alt="Resultado da aplicação de BFS" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">
 
 						<hr>
-
+						<h5 id="karatedfs">DFS:</h5>
 						<img src="pages/img/dfs1.jpeg" alt="Resultado da aplicação de DFS" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">							
 
 						<h4 id="dolphins">Dolphins:</h4>
-
+						<h5 id="dolphinsbfs">DFS:</h5>
 						<img src="pages/img/bfs2.jpeg" alt="Resultado da aplicação de BFS" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">
 
 						<hr>
-
+						<h5 id="dolphinsdfs">DFS:</h5>
 						<img src="pages/img/dfs2.jpeg" alt="Resultado da aplicação de DFS" style="max-width: 100%; max-height: 100%; display:block; margin-left: auto; margin-right: auto;">		
                         
                         <hr>
@@ -413,14 +413,26 @@
 
 						<!-- TSP -->
                         <h1 id="tsp" class="section-heading">Problema do Caixeiro Viajante</h1>
-						<h1 id="o-problema-do-caixeiro-viajante">O Problema do Caixeiro Viajante</h1>
 						<p>Para este problema, implementamos o algoritmo Twice Around em Python:</p>
 						<h3 id="twice-around">Twice Around</h3>
 						<p>Ler grafo G = (V, E, p) H ← vazia</p>
 						<ul>
-						<li>Passo 1. T ← MST(G) // Aplicando o algoritmo de Kruskal Para cada e ∈ T { T ← T + e (Duplique aresta e)</li>
+						<li>Passo 1.:
+							<ul>
+								<li>T ← MST(G) // Aplicando o algoritmo de Kruskal</li>
+								<li>Para cada e ∈ T, T ← T + e (Duplique aresta e)</li>
+							</ul>
+						</li>
 						<li>Passo 2. Encontre um circuito Euleriano L em T // Aplicando Fleury</li>
-						<li>Passo 3. Enquanto L != vazio: Escolha sequencialmente lk ∈ L Se lk ∉ H então H ← H U {lk} L ← L – {lk}</li>
+						<li>Passo 3. 
+							<ul>
+								<li>Enquanto L != vazio:</li>
+								<li>Escolha sequencialmente lk ∈ L</li>
+								<li>Se lk ∉ H então:</li>
+								<li>H ← H U {lk}</li>
+								<li>L ← L – {lk}</li>
+							</ul>
+						</li>
 						</ul>
 						<h3 id="código">Código</h3>
 						<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> twicearound(graph, source<span class="op">=</span><span class="dv">0</span>):</a>
