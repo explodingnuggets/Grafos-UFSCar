@@ -1,5 +1,3 @@
-# O Problema do Caixeiro Viajante
-
 Para este problema, implementamos o algoritmo Twice Around em Python:
 
 ### Twice Around
