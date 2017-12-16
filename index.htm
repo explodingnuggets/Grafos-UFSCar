@@ -416,9 +416,22 @@
 						<h3 id="twice-around">Twice Around</h3>
 						<p>Ler grafo G = (V, E, p) H ← vazia</p>
 						<ul>
-						<li>Passo 1. T ← MST(G) // Aplicando o algoritmo de Kruskal Para cada e ∈ T { T ← T + e (Duplique aresta e)</li>
+						<li>Passo 1.:
+							<ul>
+								<li>T ← MST(G) // Aplicando o algoritmo de Kruskal</li>
+								<li>Para cada e ∈ T, T ← T + e (Duplique aresta e)</li>
+							</ul>
+						</li>
 						<li>Passo 2. Encontre um circuito Euleriano L em T // Aplicando Fleury</li>
-						<li>Passo 3. Enquanto L != vazio: Escolha sequencialmente lk ∈ L Se lk ∉ H então H ← H U {lk} L ← L – {lk}</li>
+						<li>Passo 3. 
+							<ul>
+								<li>Enquanto L != vazio:</li>
+								<li>Escolha sequencialmente lk ∈ L</li>
+								<li>Se lk ∉ H então:</li>
+								<li>H ← H U {lk}</li>
+								<li>L ← L – {lk}</li>
+							</ul>
+						</li>
 						</ul>
 						<h3 id="código">Código</h3>
 						<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> twicearound(graph, source<span class="op">=</span><span class="dv">0</span>):</a>
