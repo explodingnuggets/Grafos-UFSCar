@@ -31,3 +31,8 @@ for graph in NX_results:
     nx.drawing.nx_agraph.write_dot(graph[0], graph[1])
 for graph in Our_results:
     nx.drawing.nx_agraph.write_dot(graph[0], graph[1])
+
+nx.draw_networkx(our_karate_dfs[0])
+plt.show()
+nx.draw_networkx(our_karate_bfs[0])
+plt.show()
