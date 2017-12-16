@@ -436,27 +436,27 @@
 						</ul>
 						<h3 id="código">Código</h3>
 						<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> twicearound(graph, source<span class="op">=</span><span class="dv">0</span>):</a>
-						<a class="sourceLine" id="cb1-2" data-line-number="2">    mst <span class="op">=</span> nx.minimum_spanning_tree(graph) <span class="co"># gero a mst a partir do grafo original</span></a>
-						<a class="sourceLine" id="cb1-3" data-line-number="3">    mst_multi <span class="op">=</span> nx.MultiGraph(mst) <span class="co"># como somente multigrafos aceitam arestas paralelas</span></a>
+						<a class="sourceLine" id="cb1-2" data-line-number="2">    mst <span class="op">=</span> nx.minimum_spanning_tree(graph) <span class="co"># Gerando a mst a partir do grafo original</span></a>
+						<a class="sourceLine" id="cb1-3" data-line-number="3">    mst_multi <span class="op">=</span> nx.MultiGraph(mst) <span class="co"># Apenas Multigraphs aceitam arestas paralelas</span></a>
 						<a class="sourceLine" id="cb1-4" data-line-number="4">    </a>
 						<a class="sourceLine" id="cb1-5" data-line-number="5">    multi_copy <span class="op">=</span> mst_multi.copy()</a>
 						<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="cf">for</span> u,v <span class="kw">in</span> multi_copy.edges():</a>
-						<a class="sourceLine" id="cb1-7" data-line-number="7">        mst_multi.add_edge(u,v)     <span class="co">#duplico arestas da mst</span></a>
+						<a class="sourceLine" id="cb1-7" data-line-number="7">        mst_multi.add_edge(u,v)     <span class="co">#Duplicando as arestas da mst</span></a>
 						<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-						<a class="sourceLine" id="cb1-9" data-line-number="9">    euleraux <span class="op">=</span> <span class="bu">list</span>(nx.eulerian_circuit(mst_multi, source)) <span class="co"># gero um circuito euleriano</span></a>
+						<a class="sourceLine" id="cb1-9" data-line-number="9">    euler <span class="op">=</span> <span class="bu">list</span>(nx.eulerian_circuit(mst_multi, source)) <span class="co"># Gerando um circuito euleriano</span></a>
 						<a class="sourceLine" id="cb1-10" data-line-number="10">    cycle <span class="op">=</span> nx.Graph()</a>
 						<a class="sourceLine" id="cb1-11" data-line-number="11">    aux <span class="op">=</span> []</a>
-						<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="cf">for</span> u,v <span class="kw">in</span> euleraux: </a>
+						<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="cf">for</span> u,v <span class="kw">in</span> euler: </a>
 						<a class="sourceLine" id="cb1-13" data-line-number="13">        aux.append(u)</a>
 						<a class="sourceLine" id="cb1-14" data-line-number="14">        aux.append(v)</a>
 						<a class="sourceLine" id="cb1-15" data-line-number="15">    h <span class="op">=</span> []</a>
 						<a class="sourceLine" id="cb1-16" data-line-number="16">    <span class="cf">for</span> i <span class="kw">in</span> aux: </a>
-						<a class="sourceLine" id="cb1-17" data-line-number="17">        <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> h):    <span class="co"># elimino repeticoes</span></a>
+						<a class="sourceLine" id="cb1-17" data-line-number="17">        <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> h):    <span class="co"># Eliminando repetições</span></a>
 						<a class="sourceLine" id="cb1-18" data-line-number="18">            h.append(i)</a>
 						<a class="sourceLine" id="cb1-19" data-line-number="19">    h.append(source)</a>
 						<a class="sourceLine" id="cb1-20" data-line-number="20">    f_weight <span class="op">=</span> <span class="dv">0</span></a>
 						<a class="sourceLine" id="cb1-21" data-line-number="21">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">30</span>):</a>
-						<a class="sourceLine" id="cb1-22" data-line-number="22">        cycle.add_edge(h[i],h[i<span class="op">+</span><span class="dv">1</span>]) <span class="co"># gero grafo resultante</span></a>
+						<a class="sourceLine" id="cb1-22" data-line-number="22">        cycle.add_edge(h[i],h[i<span class="op">+</span><span class="dv">1</span>]) <span class="co"># Gerando grafo resultante</span></a>
 						<a class="sourceLine" id="cb1-23" data-line-number="23">        cycle[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>] <span class="op">=</span> graph[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>] <span class="co"># copiando tambem o peso</span></a>
 						<a class="sourceLine" id="cb1-24" data-line-number="24">        f_weight <span class="op">+=</span> graph[h[i]][h[i<span class="op">+</span><span class="dv">1</span>]][<span class="st">&#39;weight&#39;</span>]</a>
 						<a class="sourceLine" id="cb1-25" data-line-number="25">    </a>
